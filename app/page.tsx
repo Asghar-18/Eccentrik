@@ -58,9 +58,9 @@ export default function Home() {
 
       {/* Featured Products */}
       <section className="py-16">
-        <div className="container mx-auto px-4">
+        <div className="mx-auto px-8">
           <div className="mb-10 flex items-center justify-between">
-            <h2 className="text-3xl font-semibold">Featured Collection</h2>
+            <h2 className="text-2xl sm:text-3xl font-semibold">Featured Collection</h2>
             <Link
               href="/new-arrivals"
               className="flex items-center text-sm font-medium hover:underline"

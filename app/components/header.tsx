@@ -17,10 +17,10 @@ export default function Header() {
   const searchIconRef = useRef<HTMLDivElement | null>(null);
 
   const navigationItems = [
-    { href: "/products", label: "All Products" },    
+    { href: "/products", label: "All Products" },
     { href: "/new-arrivals", label: "New Arrivals" },
     { href: "/polos", label: "Polos" },
-    { href: "/tees", label: "Tees" },    
+    { href: "/tees", label: "Tees" },
   ];
 
   useEffect(() => {
@@ -56,10 +56,9 @@ export default function Header() {
     };
   }, [isSearchOpen]);
 
-
   return (
     <header className="sticky top-0 z-50 border-b border-neutral-200 bg-white">
-      <div className="container mx-auto flex h-24 items-center justify-between">
+      <div className="px-4 sm:px-12 flex h-24 items-center justify-between">
         <Link href="/" className="text-2xl font-bold">
           ECCENTRIK
         </Link>
