@@ -6,6 +6,7 @@ import Header from "./components/header"
 import Footer from "./components/footer"
 import { CartProvider } from "./context/cart-context"
 import { Toaster } from "@/components/ui/sonner"
+import { GoogleTagManager } from '@next/third-parties/google' 
 
 
 
@@ -16,6 +17,7 @@ export const metadata: Metadata = {
   description: "ECCENTRIK - We do it better. Shop our latest collection of clothing and accessories.",
 }
 
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -23,6 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID!} />
       <body className={inter.className}>
         <CartProvider>          
             <Header />
