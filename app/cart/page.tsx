@@ -15,34 +15,32 @@ export default function CartPage() {
   const shipping = cart.length > 0 ? 4.99 : 0;
   const total = getCartTotal() + shipping;
 
-  const handleRemoveItem = (itemId: number, size: string, color: string) => {
+  const handleRemoveItem = (itemId: number, size: string) => {
     setRemovingId(itemId);
     setTimeout(() => {
-      removeFromCart(itemId, size, color);
-      setRemovingId(null);      
+      removeFromCart(itemId, size);
+      setRemovingId(null);
     }, 300);
   };
 
   const handleDecreaseQuantity = (
     itemId: number,
     size: string,
-    color: string,
     currentQuantity: number
   ) => {
     if (currentQuantity > 1) {
-      updateQuantity(itemId, size, color, currentQuantity - 1);
+      updateQuantity(itemId, size, currentQuantity - 1);
     } else {
-      handleRemoveItem(itemId, size, color);
+      handleRemoveItem(itemId, size);
     }
   };
 
   const handleIncreaseQuantity = (
     itemId: number,
     size: string,
-    color: string,
     currentQuantity: number
   ) => {
-    updateQuantity(itemId, size, color, currentQuantity + 1);
+    updateQuantity(itemId, size, currentQuantity + 1);
   };
 
   return (
@@ -51,12 +49,11 @@ export default function CartPage() {
 
       {cart.length > 0 ? (
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-3">
-          {/* Cart Items */}
           <div className="lg:col-span-2">
             <div className="space-y-6">
               {cart.map((item) => (
                 <div
-                  key={`${item.id}-${item.size}-${item.color}`}
+                  key={`${item.id}-${item.size}`}
                   className="flex border-b border-neutral-200 pb-6"
                 >
                   <div className="mr-6 h-[120px] w-[100px] overflow-hidden rounded-md bg-neutral-100">
@@ -80,7 +77,6 @@ export default function CartPage() {
                     </div>
                     <div className="mt-1 text-sm text-neutral-500">
                       {item.size && <p>Size: {item.size}</p>}
-                      {item.color && <p>Color: {item.color}</p>}
                     </div>
                     <div className="mt-auto flex items-center justify-between">
                       <div className="flex h-10 w-28 items-center">
@@ -90,7 +86,6 @@ export default function CartPage() {
                             handleDecreaseQuantity(
                               item.id,
                               item.size,
-                              item.color,
                               item.quantity
                             )
                           }
@@ -106,7 +101,6 @@ export default function CartPage() {
                             handleIncreaseQuantity(
                               item.id,
                               item.size,
-                              item.color,
                               item.quantity
                             )
                           }
@@ -118,9 +112,7 @@ export default function CartPage() {
                         className={`text-neutral-500 hover:text-red-500 ${
                           removingId === item.id ? "opacity-50" : ""
                         }`}
-                        onClick={() =>
-                          handleRemoveItem(item.id, item.size, item.color)
-                        }
+                        onClick={() => handleRemoveItem(item.id, item.size)}
                         disabled={removingId === item.id}
                       >
                         <Trash2 className="h-5 w-5" />
@@ -139,7 +131,6 @@ export default function CartPage() {
             </Link>
           </div>
 
-          {/* Order Summary */}
           <div>
             <div className="rounded-lg border border-neutral-200 p-6">
               <h2 className="mb-6 text-xl font-semibold">Order Summary</h2>

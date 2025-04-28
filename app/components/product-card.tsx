@@ -10,6 +10,7 @@ import type { Product } from "@/lib/constants/product-data";
 export default function ProductCard({ product }: { product: Product }) {
   const { addToCart } = useCart();
   const [isAdding, setIsAdding] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
 
   const handleAddToCart = () => {
     setIsAdding(true);
@@ -17,23 +18,42 @@ export default function ProductCard({ product }: { product: Product }) {
     addToCart({
       ...product,
       size: "M",
-      color: "Black",
     });
 
     setIsAdding(false);
   };
 
   return (
-    <div className="group">
+    <div
+      className="group"
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
+    >
       <div className="relative mb-4 overflow-hidden rounded-lg bg-neutral-100">
         <Link href={`/products/${product.id}`}>
-          <Image
-            src={product.image || "/placeholder.svg"}
-            alt={product.name}
-            width={300}
-            height={400}
-            className="h-[400px] w-full object-cover transition-transform duration-300 group-hover:scale-105"
-          />
+          <div className="relative h-[400px] w-full">
+            <Image
+              src={product.image || "/placeholder.svg"}
+              alt={product.name}
+              fill
+              className={`object-cover transition-opacity duration-300 ${
+                isHovering ? "opacity-0" : "opacity-100"
+              }`}
+            />
+
+            <Image
+              src={
+                product.images && product.images.length > 1
+                  ? product.images[1]
+                  : product.image
+              }
+              alt={`${product.name} alternate view`}
+              fill
+              className={`object-cover transition-opacity duration-300 ${
+                isHovering ? "opacity-100" : "opacity-0"
+              }`}
+            />
+          </div>
         </Link>
         <div className="absolute bottom-0 left-0 right-0 translate-y-full bg-white p-4 transition-transform duration-300 group-hover:translate-y-0">
           <Button
@@ -53,7 +73,7 @@ export default function ProductCard({ product }: { product: Product }) {
         <Link href={`/products/${product.id}`} className="block">
           <h3 className="mb-1 text-lg font-medium">{product.name}</h3>
         </Link>
-        <p className="font-medium">${product.price.toFixed(2)}</p>
+        <p className="font-medium">Rs.{product.price.toFixed(2)}</p>
       </div>
     </div>
   );

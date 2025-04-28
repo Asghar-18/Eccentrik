@@ -6,8 +6,7 @@ import { ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import ProductCard from "./components/product-card";
-import { getFeaturedProducts, Product  } from "@/lib/constants/product-data";
-
+import { getFeaturedProducts, Product } from "@/lib/constants/product-data";
 
 export default function Home() {
   const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
@@ -27,15 +26,26 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col">
-      {/* Hero Section */}
-      <section className="relative h-[80vh] w-full bg-neutral-100">
-        <div className="container mx-auto flex h-full flex-col items-center justify-center px-4 text-center">
-          <h1 className="mb-6 text-5xl font-bold tracking-tight md:text-6xl lg:text-7xl">
+      <section className="relative h-[80vh] w-full">
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: "url('/images/Background.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            filter: "blur(2px)",
+            opacity: "1",
+          }}
+        ></div>
+
+        <div className="absolute inset-0 bg-black opacity-40"></div>
+
+        <div className="container relative mx-auto flex h-full flex-col items-center justify-center px-4 text-center z-10">
+          <h1 className="mb-6 text-5xl font-bold tracking-tight text-white md:text-6xl lg:text-7xl">
             ECCENTRIK
           </h1>
-          <p className="mb-8 max-w-md text-lg text-neutral-600">
-            We do it better.
-          </p>
+          <p className="mb-8 max-w-md text-lg text-white">We do it better.</p>
           <div className="flex flex-col space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
             <Button size="lg" className="px-8" asChild>
               <Link className="!text-base" href="/polos">
@@ -55,12 +65,13 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Featured Products */}
+      
       <section className="py-16">
         <div className="mx-auto px-8">
           <div className="mb-10 flex items-center justify-between">
-            <h2 className="text-2xl sm:text-3xl font-semibold">Featured Collection</h2>
+            <h2 className="text-2xl sm:text-3xl font-semibold">
+              Featured Collection
+            </h2>
             <Link
               href="/new-arrivals"
               className="flex items-center text-sm font-medium hover:underline"
@@ -75,7 +86,7 @@ export default function Home() {
                 <div key={i} className="animate-pulse">
                   <div className="mb-4 h-[400px] rounded-lg bg-neutral-200"></div>
                   <div className="mb-2 h-4 w-1/3 rounded bg-neutral-200"></div>
-                  <div className="mb-2 h-5 w-2/3 rounded bg-neutral-200"></div>a
+                  <div className="mb-2 h-5 w-2/3 rounded bg-neutral-200"></div>
                   <div className="h-4 w-1/4 rounded bg-neutral-200"></div>
                 </div>
               ))}

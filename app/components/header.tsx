@@ -76,7 +76,6 @@ export default function Header() {
           ))}
         </nav>
 
-        {/* Icons */}
         <div className="flex items-center space-x-4">
           <div className="relative hidden md:block" ref={searchIconRef}>
             <button
@@ -86,7 +85,6 @@ export default function Header() {
               <SearchIcon className="h-5 w-5" />
             </button>
 
-            {/* Search dropdown below the icon */}
             {isSearchOpen && !isMobile && (
               <div className="search-dropdown absolute right-0 top-full mt-2 w-64 bg-white shadow-lg rounded-md p-2 border border-neutral-200 z-50">
                 <SearchInput onClose={() => setIsSearchOpen(false)} autoFocus />
@@ -117,7 +115,6 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="fixed inset-0 z-50 bg-white">
           <div className="container mx-auto px-4 py-6">

@@ -11,7 +11,6 @@ import { useCart } from "../../context/cart-context";
 import { getProductById, Product } from "@/lib/constants/product-data";
 interface DetailedProduct extends Product {
   sizes: string[];
-  colors: string[];
   details: string[];
   images: string[];
 }
@@ -27,7 +26,6 @@ export default function ProductDetailPage({
 }) {
   const [quantity, setQuantity] = useState(1);
   const [selectedSize, setSelectedSize] = useState("");
-  const [selectedColor, setSelectedColor] = useState("");
   const [isAdding, setIsAdding] = useState(false);
   const [product, setProduct] = useState<DetailedProduct | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -54,18 +52,17 @@ export default function ProductDetailPage({
       if (foundProduct) {
         setProduct({
           ...foundProduct,
-          sizes: ["XS", "S", "M", "L", "XL"],
-          colors: ["Black", "White", "Gray"],
+          sizes: ["S", "M", "L"],
           details: [
             "100% organic cotton",
             "Relaxed fit",
             "Machine wash cold",
-            "Made in Portugal",
+            "100 wash guarantee",
           ],
-          images: [
+          images: foundProduct.images || [
             foundProduct.image,
-            "/placeholder.svg?height=600&width=500",
-            "/placeholder.svg?height=600&width=500",
+            foundProduct.image,
+            foundProduct.image,
           ],
         });
       } else {
@@ -79,8 +76,7 @@ export default function ProductDetailPage({
             "/placeholder.svg?height=600&width=500",
             "/placeholder.svg?height=600&width=500",
           ],
-          sizes: ["XS", "S", "M", "L", "XL"],
-          colors: ["Black", "White", "Gray"],
+          sizes: ["S", "M", "L"],
           details: ["No details available"],
           category: "Unknown",
           image: "/placeholder.svg?height=600&width=500",
@@ -102,7 +98,6 @@ export default function ProductDetailPage({
       {
         ...product,
         size: selectedSize || (product.sizes ? product.sizes[0] : ""),
-        color: selectedColor || (product.colors ? product.colors[0] : ""),
       },
       quantity
     );
@@ -194,7 +189,6 @@ export default function ProductDetailPage({
       </Link>
 
       <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
-        {/* Product Images */}
         <div className="space-y-4">
           <div className="overflow-hidden rounded-lg bg-neutral-100">
             <Image
@@ -223,15 +217,13 @@ export default function ProductDetailPage({
           </div>
         </div>
 
-        {/* Product Info */}
         <div>
           <h1 className="mb-2 text-3xl font-semibold">{product.name}</h1>
           <p className="mb-6 text-2xl font-medium">
-            ${product.price.toFixed(2)}
+            Rs.{product.price.toFixed(2)}
           </p>
           <p className="mb-6 text-neutral-600">{product.description}</p>
 
-          {/* Size Selection */}
           <div className="mb-6">
             <h3 className="mb-3 text-sm font-medium">Size</h3>
             <div className="flex flex-wrap gap-3">
@@ -251,27 +243,6 @@ export default function ProductDetailPage({
             </div>
           </div>
 
-          {/* Color Selection */}
-          <div className="mb-6">
-            <h3 className="mb-3 text-sm font-medium">Color</h3>
-            <div className="flex flex-wrap gap-3">
-              {product.colors.map((color) => (
-                <button
-                  key={color}
-                  className={`flex h-10 min-w-[80px] items-center justify-center rounded-md border px-3 text-sm font-medium transition-colors ${
-                    selectedColor === color
-                      ? "border-black bg-black text-white"
-                      : "border-neutral-300 hover:border-black"
-                  }`}
-                  onClick={() => setSelectedColor(color)}
-                >
-                  {color}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Quantity */}
           <div className="mb-6">
             <h3 className="mb-3 text-sm font-medium">Quantity</h3>
             <div className="flex h-12 w-32 items-center">
@@ -293,7 +264,6 @@ export default function ProductDetailPage({
             </div>
           </div>
 
-          {/* Add to Cart */}
           <Button
             size="lg"
             className="mb-8 w-full"
@@ -304,7 +274,6 @@ export default function ProductDetailPage({
             {isAdding ? "Adding to Cart..." : "Add to Cart"}
           </Button>
 
-          {/* Product Details */}
           <div className="border-t border-neutral-200 pt-6">
             <h3 className="mb-3 text-lg font-medium">Details</h3>
             <ul className="list-inside list-disc space-y-2 text-neutral-600">
