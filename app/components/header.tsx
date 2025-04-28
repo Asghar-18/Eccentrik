@@ -7,9 +7,16 @@ import { Menu, SearchIcon, ShoppingCart, User, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCart } from "../context/cart-context";
 import SearchInput from "./search-input";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetClose,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const { getCartCount } = useCart();
@@ -105,68 +112,64 @@ export default function Header() {
               {cartCount}
             </span>
           </Link>
-          <button
-            aria-label="Menu"
-            className="md:hidden"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            <Menu className="h-6 w-6" />
-          </button>
+          
+          {/* Replace button with Sheet component */}
+          <Sheet>
+            <SheetTrigger asChild>
+              <button
+                aria-label="Menu"
+                className="md:hidden"
+              >
+                <Menu className="h-6 w-6" />
+              </button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-full px-6 sm:w-80">
+              <SheetHeader className="mt-3 pt-4 px-0 pb-2">
+                <SheetTitle>
+                  <Link
+                    href="/"
+                    className="text-xl font-bold mr-4"
+                  >
+                    ECCENTRIK
+                  </Link>
+                </SheetTitle>
+                <SheetClose className="absolute right-4 top-7">
+                  <X className="h-6 w-6" />
+                </SheetClose>
+              </SheetHeader>
+              
+              <div className="mb-4">
+                <SearchInput
+                  variant="page"
+                  onClose={() => {}}
+                />
+              </div>
+
+              <nav className="flex flex-col space-y-6">
+                {[...navigationItems, { href: "/account", label: "Account" }].map(
+                  (item) => (
+                    <SheetClose key={item.href} asChild>
+                      <Link
+                        href={item.href}
+                        className="text-lg font-medium"
+                      >
+                        {item.label}
+                      </Link>
+                    </SheetClose>
+                  )
+                )}
+                <div className="pt-6">
+                  <SheetClose asChild>
+                    <Button className="w-full" asChild>
+                      <Link href="/new-arrivals">Shop Now</Link>
+                    </Button>
+                  </SheetClose>
+                </div>
+              </nav>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
-
-      {isMenuOpen && (
-        <div className="fixed inset-0 z-50 bg-white">
-          <div className="container mx-auto px-4 py-6">
-            <div className="mb-8 flex items-center justify-between">
-              <Link
-                href="/"
-                className="text-xl font-bold"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                ECCENTRIK
-              </Link>
-              <button
-                aria-label="Close menu"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                <X className="h-6 w-6" />
-              </button>
-            </div>
-
-            <div className="mb-6">
-              <SearchInput
-                variant="page"
-                onClose={() => setIsMenuOpen(false)}
-              />
-            </div>
-
-            <nav className="flex flex-col space-y-6">
-              {[...navigationItems, { href: "/account", label: "Account" }].map(
-                (item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="text-lg font-medium"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item.label}
-                  </Link>
-                )
-              )}
-              <div className="pt-6">
-                <Button
-                  className="w-full"
-                  onClick={() => setIsMenuOpen(false)}
-                  asChild
-                >
-                  <Link href="/new-arrivals">Shop Now</Link>
-                </Button>
-              </div>
-            </nav>
-          </div>
-        </div>
-      )}
     </header>
   );
 }

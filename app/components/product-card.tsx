@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useCart } from "../context/cart-context";
 import type { Product } from "@/lib/constants/product-data";
@@ -11,6 +11,22 @@ export default function ProductCard({ product }: { product: Product }) {
   const { addToCart } = useCart();
   const [isAdding, setIsAdding] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
+  const [isTouching, setIsTouching] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect if device is mobile on component mount
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.matchMedia("(max-width: 768px)").matches);
+    };
+    
+    checkIfMobile();
+    window.addEventListener("resize", checkIfMobile);
+    
+    return () => {
+      window.removeEventListener("resize", checkIfMobile);
+    };
+  }, []);
 
   const handleAddToCart = () => {
     setIsAdding(true);
@@ -23,11 +39,17 @@ export default function ProductCard({ product }: { product: Product }) {
     setIsAdding(false);
   };
 
+  // Show second image if either hovering (on desktop) or touching (on mobile)
+  const showSecondImage = isMobile ? isTouching : isHovering;
+
   return (
     <div
       className="group"
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
+      onTouchStart={() => setIsTouching(true)}
+      onTouchEnd={() => setIsTouching(false)}
+      onTouchCancel={() => setIsTouching(false)}
     >
       <div className="relative mb-4 overflow-hidden rounded-lg bg-neutral-100">
         <Link href={`/products/${product.id}`}>
@@ -37,7 +59,7 @@ export default function ProductCard({ product }: { product: Product }) {
               alt={product.name}
               fill
               className={`object-cover transition-opacity duration-300 ${
-                isHovering ? "opacity-0" : "opacity-100"
+                showSecondImage ? "opacity-0" : "opacity-100"
               }`}
             />
 
@@ -50,12 +72,12 @@ export default function ProductCard({ product }: { product: Product }) {
               alt={`${product.name} alternate view`}
               fill
               className={`object-cover transition-opacity duration-300 ${
-                isHovering ? "opacity-100" : "opacity-0"
+                showSecondImage ? "opacity-100" : "opacity-0"
               }`}
             />
           </div>
         </Link>
-        <div className="absolute bottom-0 left-0 right-0 translate-y-full bg-white p-4 transition-transform duration-300 group-hover:translate-y-0">
+        <div className="absolute bottom-0 left-0 right-0 translate-y-full bg-white p-4 transition-transform duration-300 group-hover:translate-y-0 touch-none">
           <Button
             variant="outline"
             className="w-full !text-base"

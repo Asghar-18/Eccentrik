@@ -3,8 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
+import Image from "next/image";
 import ProductCard from "./components/product-card";
 import { getFeaturedProducts, Product } from "@/lib/constants/product-data";
 
@@ -26,46 +25,35 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col">
-      <section className="relative h-[80vh] w-full">
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: "url('/images/Background.jpg')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-            filter: "blur(2px)",
-            opacity: "1",
-          }}
-        ></div>
+      <section className="relative h-[90vh] w-full overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/Background.webp"
+            alt="ECCENTRIK brand hero image"
+            fill
+            priority
+            quality={95}
+            sizes="100vw"
+            style={{
+              objectFit: "cover",
+              objectPosition: "center",
+            }}
+          />
+        </div>
 
         <div className="absolute inset-0 bg-black opacity-40"></div>
 
-        <div className="container relative mx-auto flex h-full flex-col items-center justify-center px-4 text-center z-10">
-          <h1 className="mb-6 text-5xl font-bold tracking-tight text-white md:text-6xl lg:text-7xl">
-            ECCENTRIK
-          </h1>
-          <p className="mb-8 max-w-md text-lg text-white">We do it better.</p>
-          <div className="flex flex-col space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
-            <Button size="lg" className="px-8" asChild>
-              <Link className="!text-base" href="/polos">
-                Shop Polos
-              </Link>
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="px-8 !bg-white"
-              asChild
-            >
-              <Link className="!text-base" href="/tees">
-                Shop Tees
-              </Link>
-            </Button>
-          </div>
+        <div className="relative z-10 mx-auto flex h-full flex-col items-center justify-end px-4 pb-16 text-center">
+          <Link 
+            href="/polos" 
+            className="text-2xl text-white font-medium relative group transition-colors"
+          >
+            Shop Now
+            <span className="absolute inset-x-0 bottom-0 h-0.5 bg-white scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+          </Link>
         </div>
       </section>
-      
+
       <section className="py-16">
         <div className="mx-auto px-8">
           <div className="mb-10 flex items-center justify-between">
