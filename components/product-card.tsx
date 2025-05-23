@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { useCart } from "../context/cart-context";
+import { useCart } from "../app/context/cart-context";
 import type { Product } from "@/lib/constants/product-data";
 
 export default function ProductCard({ product }: { product: Product }) {

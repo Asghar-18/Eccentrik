@@ -2,11 +2,11 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { Menu, SearchIcon, ShoppingCart, User, X } from "lucide-react";
+import { Menu, SearchIcon, ShoppingCart, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { useCart } from "../context/cart-context";
-import SearchInput from "./search-input";
+import { useCart } from "../app/context/cart-context";
+import SearchInput from "@/components/search-input";
 import {
   Sheet,
   SheetContent,
@@ -104,7 +104,7 @@ export default function Header() {
             aria-label="Account"
             className="hidden md:block"
           >
-            <User className="h-5 w-5" />
+            {/* <User className="h-5 w-5" /> */}
           </Link>
           <Link href="/cart" aria-label="Cart" className="relative">
             <ShoppingCart className="h-5 w-5" />

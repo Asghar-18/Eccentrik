@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { Filter } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-import ProductCard from "../components/product-card"
+import ProductCard from "../../components/product-card"
 import { getNewArrivals } from "@/lib/constants/product-data";
 import type { Product } from "@/lib/constants/product-data";
 

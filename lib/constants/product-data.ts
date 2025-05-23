@@ -12,7 +12,7 @@ const productData: Product[] = [
   {
     id: 101,
     name: "Beige Tee",
-    price: 3150,
+    price: 1610,
     image: "/images/beige_front_1.jpg",
     images: [
       "/images/beige_front_1.jpg",
@@ -25,7 +25,7 @@ const productData: Product[] = [
   {
     id: 102,
     name: "White Tee",
-    price: 3150,
+    price: 1610,
     image: "/images/white_front.jpg",
     images: [
       "/images/white_front.jpg",
@@ -37,8 +37,8 @@ const productData: Product[] = [
   },
   {
     id: 103,
-    name: "Green Tee",
-    price: 3150,
+    name: "Owner's Dept. Tee",
+    price: 1610,
     image: "/images/green_front.jpg",
     images: [
       "/images/green_front.jpg",

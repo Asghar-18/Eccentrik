@@ -6,8 +6,8 @@ import { Filter } from "lucide-react";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
-import ProductCard from "../components/product-card";
-import SearchInput from "../components/search-input";
+import ProductCard from "../../components/product-card";
+import SearchInput from "../../components/search-input";
 import { getAllProducts } from "@/lib/constants/product-data";
 import type { Product } from "@/lib/constants/product-data";
 

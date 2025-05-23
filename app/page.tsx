@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
-import ProductCard from "./components/product-card";
+import ProductCard from "../components/product-card";
 import { getFeaturedProducts, Product } from "@/lib/constants/product-data";
 
 export default function Home() {
@@ -44,8 +44,8 @@ export default function Home() {
         <div className="absolute inset-0 bg-black opacity-40"></div>
 
         <div className="relative z-10 mx-auto flex h-full flex-col items-center justify-end px-4 pb-16 text-center">
-          <Link 
-            href="/polos" 
+          <Link
+            href="/products"
             className="text-2xl text-white font-medium relative group transition-colors"
           >
             Shop Now
