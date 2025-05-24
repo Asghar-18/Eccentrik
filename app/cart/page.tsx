@@ -73,7 +73,7 @@ export default function CartPage() {
                       >
                         {item.name}
                       </Link>
-                      <p className="font-medium">${item.price.toFixed(2)}</p>
+                      <p className="font-medium">Rs.{item.price.toFixed(2)}</p>
                     </div>
                     <div className="mt-1 text-sm text-neutral-500">
                       {item.size && <p>Size: {item.size}</p>}
