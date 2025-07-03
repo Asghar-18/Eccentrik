@@ -31,6 +31,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import OrderPlaced from "@/components/order-placed";
 
 export default function CheckoutPage() {
   const { cart, getCartTotal, clearCart } = useCart();
@@ -39,8 +40,9 @@ export default function CheckoutPage() {
   const [orderNumber, setOrderNumber] = useState("");
   const [activeStep, setActiveStep] = useState(1);
   const [error, setError] = useState("");
-
-  
+  const [cartSnapshot, setCartSnapshot] = useState<
+    { id: number; price: number; quantity: number }[]
+  >([]);
 
   // Define typescript interface for form data
   interface FormData {
@@ -146,6 +148,7 @@ export default function CheckoutPage() {
 
       // Success - clear cart and show success page
       setOrderNumber(randomOrderNumber);
+      setCartSnapshot(cart.map(({ id, price, quantity }) => ({ id, price, quantity })));
       clearCart();
       setIsOrderPlaced(true);
     } catch (error) {
@@ -191,30 +194,11 @@ export default function CheckoutPage() {
   // Order success view
   if (isOrderPlaced) {
     return (
-      <div className="container mx-auto flex max-w-lg flex-col items-center px-4 py-16 text-center">
-        <div className="mb-8 flex h-28 w-28 items-center justify-center rounded-full bg-green-100">
-          <CheckCircle className="h-14 w-14 text-green-600" />
-        </div>
-        <h1 className="mb-4 text-4xl font-bold">Order Confirmed!</h1>
-        <p className="mb-3 text-xl">Thank you for your purchase</p>
-        <div className="mb-6 rounded-lg bg-green-50 px-6 py-3">
-          <p className="font-medium text-green-800">
-            Order number: <span className="font-bold">{orderNumber}</span>
-          </p>
-        </div>
-        <p className="mb-10 text-lg text-neutral-600">
-          We&apos;ve sent the order details to our team and will process your
-          order shortly. Your items will be delivered within 3-5 business days.
-        </p>
-        <div className="flex w-full flex-col space-y-4">
-          <Button asChild size="lg" variant="outline" className="font-medium">
-            <Link href="/products">Continue Shopping</Link>
-          </Button>
-          <Button asChild size="lg" className="font-medium">
-            <Link href="/">Return to Home</Link>
-          </Button>
-        </div>
-      </div>
+      <OrderPlaced
+        orderNumber={orderNumber}
+        cartSnapshot={cartSnapshot}
+        total={total}
+      />
     );
   }
 
