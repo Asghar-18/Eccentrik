@@ -11,7 +11,7 @@ import { toast } from "sonner";
 import type { Product } from "@/lib/constants/product-data";
 
 export interface CartItem extends Product {
-  size: string;  
+  size: string;
   quantity: number;
 }
 
@@ -22,11 +22,7 @@ type CartContextType = {
     quantity?: number
   ) => void;
   removeFromCart: (productId: number, size: string) => void;
-  updateQuantity: (
-    productId: number,
-    size: string,    
-    quantity: number
-  ) => void;
+  updateQuantity: (productId: number, size: string, quantity: number) => void;
   clearCart: () => void;
   getCartTotal: () => number;
   getCartCount: () => number;
@@ -66,9 +62,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
     setCart((currentCart) => {
       const existingItemIndex = currentCart.findIndex(
-        (item) =>
-          item.id === product.id &&
-          item.size === product.size
+        (item) => item.id === product.id && item.size === product.size
       );
 
       let newCart: CartItem[];
@@ -84,6 +78,17 @@ export function CartProvider({ children }: { children: ReactNode }) {
         newCart = [...currentCart, newItem];
       }
 
+      // Fire Facebook Pixel event if available
+      if (typeof window !== "undefined" && typeof window.fbq === "function") {
+        window.fbq("track", "AddToCart", {
+          content_name: product.name,
+          content_ids: [product.id.toString()],
+          content_type: "product",
+          value: product.price * quantity,
+          currency: "PKR", // or "USD" if needed
+        });
+      }
+
       toast.success("Added to cart", {
         description: `${quantity} x ${product.name} has been added to your cart.`,
       });
@@ -94,13 +99,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const removeFromCart = (itemId: number, size: string) => {
     setCart((currentCart) => {
-      const item = currentCart.find(
-        (i) => i.id === itemId && i.size === size
-      );
+      const item = currentCart.find((i) => i.id === itemId && i.size === size);
 
       const filteredCart = currentCart.filter(
-        (item) =>
-          !(item.id === itemId && item.size === size)
+        (item) => !(item.id === itemId && item.size === size)
       );
 
       if (item) {
@@ -113,16 +115,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
     });
   };
 
-  const updateQuantity = (
-    itemId: number,
-    size: string,    
-    quantity: number
-  ) => {
+  const updateQuantity = (itemId: number, size: string, quantity: number) => {
     setCart((currentCart) =>
       currentCart.map((item) =>
-        item.id === itemId && item.size === size
-          ? { ...item, quantity }
-          : item
+        item.id === itemId && item.size === size ? { ...item, quantity } : item
       )
     );
   };
