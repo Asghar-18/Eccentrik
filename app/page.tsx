@@ -8,7 +8,7 @@ export default function Home() {
       <section className="relative h-[100vh] w-full overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/obscure/obscure.JPG"
+            src="/images.JPG"
             alt="ECCENTRIK brand hero image"
             fill
             priority

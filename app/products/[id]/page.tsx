@@ -301,7 +301,7 @@ export default function ProductDetailPage({
               <Image
                 src={
                   product.category === "Zipper"
-                    ? "/images/obscure/size chart.jpeg"
+                    ? "/images/size chart.jpeg"
                     : "/images/size_chart.png"
                 }
                 alt="Size Chart"

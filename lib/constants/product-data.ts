@@ -52,12 +52,8 @@ const productData: Product[] = [
     id: 104,
     name: "Obscure Black",
     price: 3450,
-    image: "/images/obscure/Black1.jpg",
-    images: [
-      "/images/obscure/Black1.jpg",
-      "/images/obscure/Black2.jpg",
-      "/images/obscure/BG3.jpg",
-    ],
+    image: "/images/Black1.jpg",
+    images: ["/images/Black1.jpg", "/images/Black2.jpg", "/images/BG3.jpg"],
     category: "Zipper",
     description:
       "Minimal, versatile, and timeless, this relaxed-fit quarter-zip offers effortless style and everyday comfort.",
@@ -66,12 +62,8 @@ const productData: Product[] = [
     id: 105,
     name: "Obscure Green",
     price: 3450,
-    image: "/images/obscure/Green1.jpg",
-    images: [
-      "/images/obscure/Green1.jpg",
-      "/images/obscure/Green2.jpg",
-      "/images/obscure/BG3.jpg",
-    ],
+    image: "/images/Green1.jpg",
+    images: ["/images/Green1.jpg", "/images/Green2.jpg", "/images/BG3.jpg"],
     category: "Zipper",
     description:
       "Minimal, versatile, and timeless, this relaxed-fit quarter-zip offers effortless style and everyday comfort.",
