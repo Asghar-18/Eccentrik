@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, SearchIcon, ShoppingCart, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -15,6 +16,7 @@ import {
   SheetClose,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { cn } from "@/lib/utils";
 
 export default function Header() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -22,11 +24,13 @@ export default function Header() {
   const { getCartCount } = useCart();
   const cartCount = getCartCount();
   const searchIconRef = useRef<HTMLDivElement | null>(null);
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
 
   const navigationItems = [
     { href: "/products", label: "All Products" },
     { href: "/new-arrivals", label: "New Arrivals" },
-    { href: "/polos", label: "Polos" },
+    { href: "/zippers", label: "Zippers" },
     { href: "/tees", label: "Tees" },
   ];
 
@@ -64,7 +68,14 @@ export default function Header() {
   }, [isSearchOpen]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-neutral-200 bg-white">
+    <header
+      className={cn(
+        "z-50 transition-colors duration-300",
+        isHomePage
+          ? "absolute top-0 w-full bg-transparent border-transparent text-white"
+          : "sticky top-0 border-b border-neutral-200 bg-white text-black"
+      )}
+    >
       <div className="px-4 sm:px-12 flex h-24 items-center justify-between">
         <Link href="/" className="text-2xl font-bold">
           ECCENTRIK
@@ -75,10 +86,18 @@ export default function Header() {
             <Link
               key={item.href}
               href={item.href}
-              className="text-base font-medium hover:text-neutral-500 transition-colors relative group"
+              className={cn(
+                "text-base font-medium transition-colors relative group",
+                isHomePage ? "hover:text-neutral-300" : "hover:text-neutral-500"
+              )}
             >
               {item.label}
-              <span className="absolute inset-x-0 bottom-0 h-0.5 bg-black scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+              <span
+                className={cn(
+                  "absolute inset-x-0 bottom-0 h-0.5 scale-x-0 group-hover:scale-x-100 transition-transform origin-left",
+                  isHomePage ? "bg-white" : "bg-black"
+                )}
+              ></span>
             </Link>
           ))}
         </nav>
@@ -93,7 +112,7 @@ export default function Header() {
             </button>
 
             {isSearchOpen && !isMobile && (
-              <div className="search-dropdown absolute right-0 top-full mt-2 w-64 bg-white shadow-lg rounded-md p-2 border border-neutral-200 z-50">
+              <div className="search-dropdown absolute right-0 top-full mt-2 w-64 bg-white text-black shadow-lg rounded-md p-2 border border-neutral-200 z-50">
                 <SearchInput onClose={() => setIsSearchOpen(false)} autoFocus />
               </div>
             )}
@@ -108,56 +127,56 @@ export default function Header() {
           </Link>
           <Link href="/cart" aria-label="Cart" className="relative">
             <ShoppingCart className="h-5 w-5" />
-            <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-black text-xs text-white">
+            <span
+              className={cn(
+                "absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full text-xs",
+                isHomePage ? "bg-white text-black" : "bg-black text-white"
+              )}
+            >
               {cartCount}
             </span>
           </Link>
-          
+
           {/* Replace button with Sheet component */}
           <Sheet>
             <SheetTrigger asChild>
-              <button
-                aria-label="Menu"
-                className="md:hidden"
-              >
+              <button aria-label="Menu" className="md:hidden">
                 <Menu className="h-6 w-6" />
               </button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-full px-6 sm:w-80">
+            <SheetContent
+              side="right"
+              className="w-full px-6 sm:w-80 bg-white text-black"
+            >
               <SheetHeader className="mt-3 pt-4 px-0 pb-2">
                 <SheetTitle>
-                  <Link
-                    href="/"
-                    className="text-xl font-bold mr-4"
-                  >
+                  <Link href="/" className="text-xl font-bold mr-4 text-black">
                     ECCENTRIK
                   </Link>
                 </SheetTitle>
                 <SheetClose className="absolute right-4 top-7">
-                  <X className="h-6 w-6" />
+                  <X className="h-6 w-6 text-black" />
                 </SheetClose>
               </SheetHeader>
-              
+
               <div className="mb-4">
-                <SearchInput
-                  variant="page"
-                  onClose={() => {}}
-                />
+                <SearchInput variant="page" onClose={() => {}} />
               </div>
 
               <nav className="flex flex-col space-y-6">
-                {[...navigationItems, { href: "/account", label: "Account" }].map(
-                  (item) => (
-                    <SheetClose key={item.href} asChild>
-                      <Link
-                        href={item.href}
-                        className="text-lg font-medium"
-                      >
-                        {item.label}
-                      </Link>
-                    </SheetClose>
-                  )
-                )}
+                {[
+                  ...navigationItems,
+                  { href: "/account", label: "Account" },
+                ].map((item) => (
+                  <SheetClose key={item.href} asChild>
+                    <Link
+                      href={item.href}
+                      className="text-lg font-medium text-black"
+                    >
+                      {item.label}
+                    </Link>
+                  </SheetClose>
+                ))}
                 <div className="pt-6">
                   <SheetClose asChild>
                     <Button className="w-full" asChild>

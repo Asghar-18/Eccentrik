@@ -3,7 +3,7 @@ export interface Product {
   name: string;
   price: number;
   image: string;
-  images: string[]; 
+  images: string[];
   category: string;
   description: string;
 }
@@ -48,12 +48,41 @@ const productData: Product[] = [
     category: "T-Shirts",
     description: "Our signature tee with exceptional comfort and style.",
   },
+  {
+    id: 104,
+    name: "Obscure Black",
+    price: 3450,
+    image: "/images/obscure/Black1.jpg",
+    images: [
+      "/images/obscure/Black1.jpg",
+      "/images/obscure/Black2.jpg",
+      "/images/obscure/BG3.jpg",
+    ],
+    category: "Zipper",
+    description:
+      "Minimal, versatile, and timeless, this relaxed-fit quarter-zip offers effortless style and everyday comfort.",
+  },
+  {
+    id: 105,
+    name: "Obscure Green",
+    price: 3450,
+    image: "/images/obscure/Green1.jpg",
+    images: [
+      "/images/obscure/Green1.jpg",
+      "/images/obscure/Green2.jpg",
+      "/images/obscure/BG3.jpg",
+    ],
+    category: "Zipper",
+    description:
+      "Minimal, versatile, and timeless, this relaxed-fit quarter-zip offers effortless style and everyday comfort.",
+  },
 ];
 
 // Define which product IDs appear in which collection
-const newArrivalsIds = [101, 102, 103];
+const newArrivalsIds = [104, 105];
 const teesIds = [101, 102, 103];
-const featuredIds = [101, 102, 103];
+const zippersIds = [104, 105];
+const featuredIds = [104, 105];
 
 // Get all products (no duplicates)
 export function getAllProducts(): Product[] {
@@ -69,17 +98,22 @@ export function getProductsByCategory(category: string): Product[] {
 
 // Get new arrivals
 export function getNewArrivals(): Product[] {
-  return productData.filter(product => newArrivalsIds.includes(product.id));
+  return productData.filter((product) => newArrivalsIds.includes(product.id));
 }
 
 // Get tees
 export function getTees(): Product[] {
-  return productData.filter(product => teesIds.includes(product.id));
+  return productData.filter((product) => teesIds.includes(product.id));
+}
+
+// Get zippers
+export function getZippers(): Product[] {
+  return productData.filter((product) => zippersIds.includes(product.id));
 }
 
 // Get featured products
 export function getFeaturedProducts(): Product[] {
-  return productData.filter(product => featuredIds.includes(product.id));
+  return productData.filter((product) => featuredIds.includes(product.id));
 }
 
 // Get product by ID

@@ -114,6 +114,7 @@ export default function CartPage() {
                         }`}
                         onClick={() => handleRemoveItem(item.id, item.size)}
                         disabled={removingId === item.id}
+                        aria-label="Remove item from cart"
                       >
                         <Trash2 className="h-5 w-5" />
                       </button>

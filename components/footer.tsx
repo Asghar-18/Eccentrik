@@ -21,13 +21,13 @@ export default function Footer() {
                 >
                   New Arrivals
                 </Link>
-              </li>
+              </li>              
               <li>
                 <Link
-                  href="/polos"
+                  href="/zippers"
                   className="text-neutral-600 hover:text-black"
                 >
-                  Polos
+                  Zippers
                 </Link>
               </li>
               <li>

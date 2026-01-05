@@ -53,12 +53,20 @@ export default function ProductDetailPage({
         setProduct({
           ...foundProduct,
           sizes: ["S", "M", "L"],
-          details: [
-            "100% organic cotton",
-            "Relaxed fit",
-            "Machine wash cold",
-            "100 wash guarantee",
-          ],
+          details:
+            foundProduct.category === "Zipper"
+              ? [
+                  "Relaxed fit",
+                  "Soft, warm fabric",
+                  "Modern quarter-zip neckline",
+                  "200 wash guarantee",
+                ]
+              : [
+                  "100% organic cotton",
+                  "Relaxed fit",
+                  "Machine wash cold",
+                  "100 wash guarantee",
+                ],
           images: foundProduct.images || [
             foundProduct.image,
             foundProduct.image,
@@ -190,27 +198,28 @@ export default function ProductDetailPage({
 
       <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
         <div className="space-y-4">
-          <div className="overflow-hidden rounded-lg bg-neutral-100">
+          {/* <div className="overflow-hidden h-4/5 rounded-lg bg-neutral-100"> */}
+          <div className="h-[600px] w-5/6 overflow-hidden rounded-lg bg-neutral-100">
             <Image
               src={product.images[0] || "/placeholder.svg"}
               alt={product.name}
               width={500}
               height={600}
-              className="h-auto w-full object-cover"
+              className="h-full w-full object-cover"
             />
           </div>
           <div className="grid grid-cols-3 gap-4">
             {product.images.slice(1).map((image, index) => (
               <div
                 key={index}
-                className="overflow-hidden rounded-lg bg-neutral-100"
+                className="overflow-hidden h-5/6 rounded-lg bg-neutral-100"
               >
                 <Image
                   src={image || "/placeholder.svg"}
                   alt={`${product.name} view ${index + 2}`}
                   width={150}
                   height={180}
-                  className="h-auto w-full object-cover"
+                  className="h-full w-full object-cover"
                 />
               </div>
             ))}
@@ -249,6 +258,7 @@ export default function ProductDetailPage({
               <button
                 className="flex h-full w-12 items-center justify-center border border-r-0 border-neutral-300"
                 onClick={decreaseQuantity}
+                aria-label="Decrease quantity"
               >
                 <Minus className="h-4 w-4" />
               </button>
@@ -258,6 +268,7 @@ export default function ProductDetailPage({
               <button
                 className="flex h-full w-12 items-center justify-center border border-l-0 border-neutral-300"
                 onClick={increaseQuantity}
+                aria-label="Increase quantity"
               >
                 <Plus className="h-4 w-4" />
               </button>
@@ -281,6 +292,23 @@ export default function ProductDetailPage({
                 <li key={index}>{detail}</li>
               ))}
             </ul>
+          </div>
+
+          <div className="border-t border-neutral-200 pt-6">
+            <h3 className="mb-2 text-lg font-medium">Size Chart</h3>
+            <div className="w-3/5">
+              <Image
+                src={
+                  product.category === "Zipper"
+                    ? "/images/obscure/size chart.jpeg"
+                    : "/images/size_chart.png"
+                }
+                alt="Size Chart"
+                width={300}
+                height={200}
+                className="h-full w-full rounded-lg"
+              />
+            </div>
           </div>
         </div>
       </div>
