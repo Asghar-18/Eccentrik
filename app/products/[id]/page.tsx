@@ -56,6 +56,7 @@ export default function ProductDetailPage({
           details:
             foundProduct.category === "Zipper"
               ? [
+                  "Unisex",
                   "Relaxed fit",
                   "Soft, warm fabric",
                   "Modern quarter-zip neckline",
