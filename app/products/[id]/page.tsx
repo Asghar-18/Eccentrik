@@ -54,7 +54,7 @@ export default function ProductDetailPage({
           ...foundProduct,
           sizes: ["S", "M", "L"],
           details:
-            foundProduct.category === "Zipper"
+            foundProduct.category === "Quarter Zipper"
               ? [
                   "Unisex",
                   "Relaxed fit",
@@ -213,7 +213,7 @@ export default function ProductDetailPage({
             {product.images.slice(1).map((image, index) => (
               <div
                 key={index}
-                className="h-32 md:h-5/6 w-full overflow-hidden rounded-lg bg-neutral-100"
+                className="h-32 md:h-4/6 w-full overflow-hidden rounded-lg bg-neutral-100"
               >
                 <Image
                   src={image || "/placeholder.svg"}
@@ -300,7 +300,7 @@ export default function ProductDetailPage({
             <div className="w-3/5">
               <Image
                 src={
-                  product.category === "Zipper"
+                  product.category === "Quarter Zipper"
                     ? "/images/obscure/size chart.jpeg"
                     : "/images/size_chart.png"
                 }
