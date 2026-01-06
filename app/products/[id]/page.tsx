@@ -200,7 +200,7 @@ export default function ProductDetailPage({
       <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
         <div className="space-y-4">
           {/* <div className="overflow-hidden h-4/5 rounded-lg bg-neutral-100"> */}
-          <div className="h-[600px] w-5/6 overflow-hidden rounded-lg bg-neutral-100">
+          <div className="h-[500px] md:h-[600px] w-full md:w-5/6 overflow-hidden rounded-lg bg-neutral-100">
             <Image
               src={product.images[0] || "/placeholder.svg"}
               alt={product.name}
@@ -213,7 +213,7 @@ export default function ProductDetailPage({
             {product.images.slice(1).map((image, index) => (
               <div
                 key={index}
-                className="overflow-hidden h-5/6 rounded-lg bg-neutral-100"
+                className="h-32 md:h-5/6 w-full overflow-hidden rounded-lg bg-neutral-100"
               >
                 <Image
                   src={image || "/placeholder.svg"}
