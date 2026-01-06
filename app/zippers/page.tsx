@@ -17,7 +17,7 @@ export default function ZippersPage() {
       setProducts(zipperProducts);
       setIsLoading(false);
     } catch (error) {
-      console.error("Error fetching quarter zippers:", error);
+      console.error("Error fetching quarter zips:", error);
       setProducts([]);
       setIsLoading(false);
     }
@@ -26,7 +26,7 @@ export default function ZippersPage() {
   return (
     <main className="container mx-auto px-4 py-12">
       <div className="mb-8 flex items-center justify-between">
-        <h1 className="text-3xl font-semibold">Quarter Zippers</h1>
+        <h1 className="text-3xl font-semibold">Quarter Zip</h1>
         <Button variant="outline" size="sm" className="flex items-center gap-2">
           <Filter className="h-4 w-4" /> Filter
         </Button>

@@ -54,7 +54,7 @@ export default function ProductDetailPage({
           ...foundProduct,
           sizes: ["S", "M", "L"],
           details:
-            foundProduct.category === "Quarter Zipper"
+            foundProduct.category === "Quarter Zip"
               ? [
                   "Unisex",
                   "Relaxed fit",
@@ -300,7 +300,7 @@ export default function ProductDetailPage({
             <div className="w-3/5">
               <Image
                 src={
-                  product.category === "Quarter Zipper"
+                  product.category === "Quarter Zip"
                     ? "/images/obscure/size chart.jpeg"
                     : "/images/size_chart.png"
                 }

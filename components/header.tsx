@@ -30,7 +30,7 @@ export default function Header() {
   const navigationItems = [
     { href: "/products", label: "All Products" },
     { href: "/new-arrivals", label: "New Arrivals" },
-    { href: "/zippers", label: "Quarter Zippers" },
+    { href: "/zippers", label: "Quarter Zip" },
     { href: "/tees", label: "Tees" },
   ];
 

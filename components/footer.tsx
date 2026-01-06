@@ -27,7 +27,7 @@ export default function Footer() {
                   href="/zippers"
                   className="text-neutral-600 hover:text-black"
                 >
-                  Quarter Zippers
+                  Quarter Zip
                 </Link>
               </li>
               <li>

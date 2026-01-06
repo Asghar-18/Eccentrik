@@ -58,7 +58,7 @@ const productData: Product[] = [
       "/images/obscure/Black2.JPG",
       "/images/obscure/BG3.JPG",
     ],
-    category: "Quarter Zipper",
+    category: "Quarter Zip",
     description:
       "Minimal, versatile, and timeless, this relaxed-fit quarter-zip offers effortless style and everyday comfort.",
   },
@@ -72,7 +72,7 @@ const productData: Product[] = [
       "/images/obscure/Green2.JPG",
       "/images/obscure/BG3.JPG",
     ],
-    category: "Quarter Zipper",
+    category: "Quarter Zip",
     description:
       "Minimal, versatile, and timeless, this relaxed-fit quarter-zip offers effortless style and everyday comfort.",
   },
@@ -106,7 +106,7 @@ export function getTees(): Product[] {
   return productData.filter((product) => teesIds.includes(product.id));
 }
 
-// Get quarter zippers
+// Get quarter zips
 export function getZippers(): Product[] {
   return productData.filter((product) => zippersIds.includes(product.id));
 }
